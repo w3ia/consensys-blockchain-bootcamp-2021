@@ -53,26 +53,22 @@ function blockHash(bl) {
 }
 
 function verifyBlock(bl) {
-	let verified = false;
-
 	// Check if genesis block
-	if (bl.index == 0 && bl.hash === "000000") return verified = true;
+	if (bl.index == 0 && bl.hash === "000000") return true;
+	if (bl.index >= 0 && bl.prevHash.length > 0 && bl.data.length > 0 && bl.hash === blockHash(bl)) return true;
 
-	if (bl.index >= 0 && bl.prevHash.length > 0 && bl.data.length > 0 && bl.hash === blockHash(bl)) return verified = true;
+	return false;
 }
 
 function verifyChain(chain) {
-	let verified = true;
-
 	for (let block of Blockchain.blocks) {
 		if (!verifyBlock(block)) {
 			console.log("Block verification failed: " + block.data);
-			return verified = false;		
+			return false;		
 		}
 	}
 	for (let i = Blockchain.blocks.length - 1; i > 0; i--) {
 		if(Blockchain.blocks[i].prevHash != Blockchain.blocks[i - 1].hash) return false;
 	}
-
-	return verified;
+	return true;
 }
