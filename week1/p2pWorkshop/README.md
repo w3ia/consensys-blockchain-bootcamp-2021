@@ -1,4 +1,4 @@
-Challenge from https://mafintosh.github.io/p2p-workshop/build/01.html:
+Challenge from https://mafintosh.github.io/p2p-workshop/build/01.html
 
 1 - Echo TCP server
 ===================
